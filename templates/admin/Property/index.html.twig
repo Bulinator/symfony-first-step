@@ -5,7 +5,7 @@
 {% block body %}
   <div class="container mt-4">
     <h1>Manage goods</h1>
-    
+
     {% for message in app.flashes('success') %}
       <div class="alert alert-success">{{ message }}</div>
     {% endfor %}
@@ -27,7 +27,7 @@
                     <a href="{{ path('admin.property.edit', {id: property.id}) }}" class="btn btn-sm btn-secondary mr-1">Edit</a>
                     <form method="POST" action="{{ path('admin.property.delete', {id: property.id}) }}" onSubmit="return confirm('Are you sure you want to delete this good ?')">
                       <input type="hidden" name="_method" value="DELETE">
-                      <input type="hidden" name="_token" value="{{ csrf_token('delete ~ property.id') }}">
+                      <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ property.id) }}">
                       <button class="btn btn-sm btn-danger">DELETE</button>
                     </form>
                 </div>
