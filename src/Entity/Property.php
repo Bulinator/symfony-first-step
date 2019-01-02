@@ -27,12 +27,6 @@ class Property
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\Range(
-     *      min = 10,
-     *      max = 255,
-     *      minMessage = "You must insert at least {{ limit }}",
-     *      maxMessage = "You cannot insert taller than {{ limit }}"
-     * )
      */
     private $title;
 
@@ -43,6 +37,12 @@ class Property
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\Range(
+     *      min = 10,
+     *      max = 255,
+     *      minMessage = "You must insert at least {{ limit }}",
+     *      maxMessage = "You cannot insert taller than {{ limit }}"
+     * )
      */
     private $surface;
 
