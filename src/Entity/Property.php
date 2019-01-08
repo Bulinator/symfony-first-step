@@ -63,12 +63,6 @@ class Property
 
     /**
      * @ORM\Column(type="integer")
-     * @Assert\Range(
-     *      min = 10,
-     *      max = 400,
-     *      minMessage = "You must insert at least {{ limit }}",
-     *      maxMessage = "You cannot insert taller than {{ limit }}"
-     * )
      */
     private $price;
 
@@ -142,7 +136,15 @@ class Property
 
         return $this;
     }
-
+    
+    /*
+     * @Assert\Range(
+     *      min = 10,
+     *      max = 400,
+     *      minMessage = "You must insert at least {{ limit }}",
+     *      maxMessage = "You cannot insert taller than {{ limit }}"
+     * )    
+     */
     public function getSurface(): ?int
     {
         return $this->surface;

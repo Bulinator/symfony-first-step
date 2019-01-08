@@ -5,8 +5,12 @@ namespace App\Controller;
 use App\Entity\Property;
 use App\Repository\PropertyRepository;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use Knp\Component\Pager\PaginatorInterface;
+use App\Entity\PropertySearch;
+use App\Form\PropertySearchType;
 
 class PropertyController extends AbstractController
 {
@@ -29,38 +33,24 @@ class PropertyController extends AbstractController
     /**
      * @Route("/property", name="property.index")
      */
-    public function index(): Response
+    public function index(PaginatorInterface $paginator, Request $request): Response
     {
-        // tuto => insert one flat at least in database
-        // $property = new Property();
-        // // set property (dev)
-        // $property
-        //   ->setTitle('My first flat')
-        //   ->setPrice(200000)
-        //   ->setRoom(4)
-        //   ->setBedrooms(2)
-        //   ->setDescription('Short description')
-        //   ->setSurface(200)
-        //   ->setFloor(2)
-        //   ->setHeat(1)
-        //   ->setCity('Brussels')
-        //   ->setAddress('Rue marché aux poulets')
-        //   ->setPostalCode(1000);
-        //
-        // // register entity into db
-        // $em = $this->getDoctrine()->getManager();
-        // $em->persist($property);
-        // $em->flush(); // update all change in database
+        // create entity research
+        // create form
+        // create request into controller
+        $search = new PropertySearch();
+        $form = $this->createForm(PropertySearchType::class, $search);
+        $form->handleRequest($request);
 
-        // get record
-        //$repository = $this->getDoctrine()->getRepository(Property::class);
-        //dump($repository);
-        // $property = $this->repository->findAllVisible();
-        // dump($property);
-        // $this->em->flush();
-
+        $properties = $paginator->paginate(
+          $this->repository->findAllVisibleQuery($search),
+          $request->query->getInt('page', 1),
+          12
+        );
         return $this->render('property/index.html.twig', [
-            'current_menu' => 'properties'
+            'current_menu' => 'properties',
+            'properties' => $properties,
+            'form' => $form->createView()
         ]);
     }
 
