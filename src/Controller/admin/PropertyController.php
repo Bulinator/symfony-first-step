@@ -1,14 +1,17 @@
 <?php
 namespace App\Controller\admin;
 
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
-use Doctrine\Common\Persistence\ObjectManager;
-use Symfony\Component\HttpFoundation\Request;
-use App\Form\PropertyType;
 use App\Entity\Property;
+use App\Form\PropertyType;
 use App\Repository\PropertyRepository;
+use Doctrine\Common\Persistence\ObjectManager;
+#use Liip\ImagineBundle\Imagine\Cache\CacheManager;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+#use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+#use Vich\UploaderBundle\Templating\Helper\UploaderHelper;
 
 
 class PropertyController extends AbstractController
@@ -55,7 +58,7 @@ class PropertyController extends AbstractController
      * @param Property
      */
     public function edit(Property $property, Request $request)
-    {        
+    {
         $form = $this->createForm(PropertyType::class, $property);
         $form->handleRequest($request);
 
