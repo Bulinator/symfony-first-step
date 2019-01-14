@@ -11,7 +11,7 @@
       {% if not form.vars.valid %}
         <div class="alert alert-danger">Error on contact form</div>
       {% endif %}
-      
+
       <div class="row">
         <div class="col-md-8">
           {% if property.filename %}
@@ -25,8 +25,8 @@
           <h2>{{ property.title }}</h2>
           <h3>{{ property.room }} room(s) {{ property.surface }} m2</h3>
           <div class="text-primary" style="font-size: 3rem; font-weight: bold">{{ property.setFormattedPrice }} Eur</div>
-          <a href="#" class="btn btn-primary">Contact agency</a>
-          <div id="contactForm" class="mt-4">
+          <a href="#" class="btn btn-primary" id="contactButton"{% if form.vars.submitted %} style="display:none;"{% endif %}>Contact agency</a>
+        <div id="contactForm" class="mt-4"{% if not form.vars.submitted %} style="display:none;"{% endif %}>
               {{ form_start(form) }}
                 <div class="row">
                   <div class="col">{{ form_row(form.firstname) }}</div>
