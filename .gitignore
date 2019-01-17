@@ -1,3 +1,5 @@
+public/media
+
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.*.local
