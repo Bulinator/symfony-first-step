@@ -4,7 +4,10 @@ namespace App\Form;
 
 use App\Entity\PropertySearch;
 use App\Entity\Option;
+use Doctrine\DBAL\Types\TextType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -37,6 +40,20 @@ class PropertySearchType extends AbstractType
                 'choice_label' => 'name',
                 'multiple' => true
             ])
+            ->add('address', null, [
+                'label' => false,
+                'required' => false
+            ])
+            ->add('distance', ChoiceType::class, [
+                'label' => false,
+                'required' => false,
+                'choices' => [
+                    '10km' => 10,
+                    '1000km' => 1000
+                ]
+            ])
+            ->add('lat', HiddenType::class)
+            ->add('lng', HiddenType::class)
             /* do not use, better to use html tag
             ->add('submit', SubmitType::class, [
                 'label' => 'Search'
